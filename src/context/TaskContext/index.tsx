@@ -1,19 +1,20 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-enum TaskPriority {
+export enum TaskPriority {
   Low,
   Medium,
   High,
 }
 
-interface Task {
+export interface Task {
   id: string;
   title: string;
   description: string;
   priority: TaskPriority;
 }
 
-type Tasks = Task[] | [];
+export type Tasks = Task[] | [];
 
 export interface TaskContextProps {
   tasks: Tasks;
@@ -29,8 +30,20 @@ interface TaskProviderProps {
   children: ReactNode;
 }
 
+const taskLocalStorageKey = uuidv4();
+
 export const TasksProvider = ({ children }: TaskProviderProps) => {
   const [tasks, setTasks] = useState<Tasks>([]);
+
+  useEffect(() => {
+    const tasksFromStore = localStorage.getItem(taskLocalStorageKey);
+    const tasks = Boolean(tasksFromStore) && JSON.parse(tasksFromStore || "");
+    tasks && setTasks(tasks);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(taskLocalStorageKey, JSON.stringify(tasks));
+  }, [tasks]);
 
   return (
     <TaskContext.Provider
