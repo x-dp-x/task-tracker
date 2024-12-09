@@ -30,7 +30,7 @@ interface TaskProviderProps {
   children: ReactNode;
 }
 
-const taskLocalStorageKey = uuidv4();
+export const taskLocalStorageKey = uuidv4();
 
 export const TasksProvider = ({ children }: TaskProviderProps) => {
   const [tasks, setTasks] = useState<Tasks>([]);
