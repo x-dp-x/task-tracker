@@ -8,7 +8,7 @@ import {
   TaskPriority,
   TaskContext,
   taskLocalStorageKey,
-} from "../../context/TaskContext";
+} from "../../context/TaskContext/TaskContext";
 
 const firstTask = {
   id: uuidv4(),

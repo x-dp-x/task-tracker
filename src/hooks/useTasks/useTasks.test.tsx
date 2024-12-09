@@ -3,8 +3,11 @@ import { v4 as uuidv4 } from "uuid";
 import { render } from "@testing-library/react";
 import { waitFor } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
-import { TasksProvider, TaskPriority } from "../../context/TaskContext";
-import { useTasks } from "./";
+import {
+  TasksProvider,
+  TaskPriority,
+} from "../../context/TaskContext/TaskContext";
+import { useTasks } from "./useTasks";
 
 const firstTask = {
   id: uuidv4(),
