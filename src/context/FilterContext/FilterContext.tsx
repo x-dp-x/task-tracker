@@ -1,11 +1,8 @@
 import React, { ReactNode, useState } from "react";
+import { TaskPriority } from "../TaskContext/TaskContext";
 
-enum FilterTypes {
-  Priority,
-}
-
-interface FilterOpts {
-  filterBy?: FilterTypes;
+export interface FilterOpts {
+  filterBy: TaskPriority | null;
 }
 
 export interface FilterContextProps {
@@ -14,8 +11,12 @@ export interface FilterContextProps {
 }
 
 export const FilterContext = React.createContext<FilterContextProps>({
-  filterOpts: {},
-  setFilterOpts: () => [],
+  filterOpts: {
+    filterBy: null,
+  },
+  setFilterOpts: () => ({
+    filterBy: null,
+  }),
 });
 
 interface FilterProviderProps {
@@ -23,7 +24,11 @@ interface FilterProviderProps {
 }
 
 export const FilterProvider = ({ children }: FilterProviderProps) => {
-  const [filterOpts, setFilterOpts] = useState<FilterOpts>({});
+  const [filterOpts, setFilterOpts] = useState<FilterOpts>({
+    filterBy: null,
+  });
+
+  console.log(filterOpts);
 
   return (
     <FilterContext.Provider
