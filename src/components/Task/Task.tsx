@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, memo } from "react";
 import type { Task as TaskInterface } from "../../context/TaskContext/TaskContext.tsx";
 import { useTasks } from "../../hooks/useTasks/useTasks.ts";
 import "./Task.css";
 
-export const Task = ({ id, title, description, priority }: TaskInterface) => {
+const _Task = ({ id, title, description, priority }: TaskInterface) => {
   // TODO: use the inEditMode state to conditionally render a form if in edit mode
   // TODO: call editTask from the useTasks hook when saving edit form
   const [inEditMode, setInEditMode] = useState(false);
@@ -37,3 +37,5 @@ export const Task = ({ id, title, description, priority }: TaskInterface) => {
     </div>
   );
 };
+
+export const Task = memo(_Task);
