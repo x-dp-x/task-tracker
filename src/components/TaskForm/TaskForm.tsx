@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
-import { object as yObj, string as yStr, number as yNum } from "yup";
+import { object as yObj, string as yStr } from "yup";
+import { v4 as uuidv4 } from "uuid";
+import type {
+  TaskPriority,
+  Tasks,
+} from "../../context/TaskContext/TaskContext.tsx";
+import { AddTask } from "../../hooks/useTasks/useTasks.ts";
 import "./TaskForm.css";
 
-const taskTitleField = "add-task__title";
-const taskDescField = "add-task__desc";
-const taskPriorityField = "add-task__priority";
+const taskTitleField = "title";
+const taskDescField = "description";
+const taskPriorityField = "priority";
 const formSchema = yObj().shape({
   [taskTitleField]: yStr().trim().required("Required"),
   [taskDescField]: yStr().trim().required("Required"),
-  [taskPriorityField]: yNum().required("Required"),
+  [taskPriorityField]: yStr().trim().required("Required"),
 });
 
-export const TaskForm = ({ options, defaultPriority }) => {
+interface TaskFormProps {
+  options: string[];
+  defaultPriority: TaskPriority;
+  handleSubmit({ task }: AddTask): Tasks;
+}
+
+export const TaskForm = ({
+  options,
+  defaultPriority,
+  handleSubmit,
+}: TaskFormProps) => {
+  const [id, setId] = useState(uuidv4());
   const initialValues = {
     [taskTitleField]: "",
     [taskDescField]: "",
@@ -23,11 +40,13 @@ export const TaskForm = ({ options, defaultPriority }) => {
     <Formik
       initialValues={initialValues}
       validationSchema={formSchema}
-      onSubmit={async () => {
-        console.log("hi!");
+      onSubmit={async (values, actions) => {
+        handleSubmit({ task: { ...values, id } });
+        setId(uuidv4());
+        actions.resetForm();
       }}
     >
-      {({ isValid, isSubmitting, handleSubmit }) => (
+      {({ isValid, isSubmitting, dirty }) => (
         <Form className="task-form">
           <Field
             as="select"
@@ -55,11 +74,7 @@ export const TaskForm = ({ options, defaultPriority }) => {
             placeholder="Task Description"
             className="task-form__field"
           />
-          <button
-            type="button"
-            disabled={!isValid || isSubmitting}
-            onClick={() => handleSubmit()}
-          >
+          <button type="submit" disabled={!isValid || isSubmitting || !dirty}>
             Add task!
           </button>
         </Form>

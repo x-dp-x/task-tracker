@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { TaskContext } from "../../context/TaskContext/TaskContext.tsx";
 import type { Task, Tasks } from "../../context/TaskContext/TaskContext.tsx";
 
-interface AddTask {
+export interface AddTask {
   task: Task;
 }
 
