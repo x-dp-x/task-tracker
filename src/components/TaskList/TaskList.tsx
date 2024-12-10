@@ -24,7 +24,6 @@ export const TaskList = ({
   loaded,
   filterOptions,
 }: TaskListProps) => {
-  console.log(filterOptions);
   const tasks =
     filterOptions.filterBy !== null
       ? filterTasksBy({
