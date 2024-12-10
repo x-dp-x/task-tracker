@@ -2,9 +2,9 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export enum TaskPriority {
-  Low,
-  Medium,
-  High,
+  Low = "Low",
+  Medium = "Medium",
+  High = "Heigh",
 }
 
 export interface Task {
