@@ -1,9 +1,10 @@
 import "./App.css";
 import React from "react";
-import { TaskPriority } from "../../context/TaskContext/TaskContext";
+import { TaskPriority } from "../context/TaskContext/TaskContext.tsx";
 import { useTasks } from "../hooks/useTasks/useTasks.ts";
 import { Task } from "../components/Task/Task.tsx";
 import { FilterSelection } from "../components/FilterSelection/FilterSelection.tsx";
+import { TaskForm } from "../components/TaskForm/TaskForm.tsx";
 
 const filterLabel = "Select Priority";
 const filterOpts = [TaskPriority.High, TaskPriority.Medium, TaskPriority.Low];
@@ -23,6 +24,10 @@ export const App = () => {
           </section>
         ) : null}
       </div>
+
+      <aside className="aside">
+        <TaskForm />
+      </aside>
     </div>
   );
 };
