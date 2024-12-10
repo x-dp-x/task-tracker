@@ -1,7 +1,12 @@
 import "./App.css";
 import React from "react";
+import { TaskPriority } from "../../context/TaskContext/TaskContext";
 import { useTasks } from "../hooks/useTasks/useTasks.ts";
 import { Task } from "../components/Task/Task.tsx";
+import { FilterSelection } from "../components/FilterSelection/FilterSelection.tsx";
+
+const filterLabel = "Select Priority";
+const filterOpts = [TaskPriority.High, TaskPriority.Medium, TaskPriority.Low];
 
 export const App = () => {
   const { tasks } = useTasks();
@@ -9,6 +14,7 @@ export const App = () => {
   return (
     <div className="app">
       <div className="body">
+        <FilterSelection title={filterLabel} options={filterOpts} />
         {tasks.length > 0 ? (
           <section className="tasklist">
             {tasks.map((task) => (
