@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import { object as yObj, string as yStr, number as yNum } from "yup";
+import "./TaskForm.css";
 
 const taskTitleField = "add-task__title";
 const taskDescField = "add-task__desc";
@@ -11,7 +12,7 @@ const formSchema = yObj().shape({
   [taskPriorityField]: yNum().required("Required"),
 });
 
-export const TaskForm = ({ filterOpts, defaultPriority }) => {
+export const TaskForm = ({ options, defaultPriority }) => {
   const initialValues = {
     [taskTitleField]: "",
     [taskDescField]: "",
@@ -27,15 +28,32 @@ export const TaskForm = ({ filterOpts, defaultPriority }) => {
       }}
     >
       {({ isValid, isSubmitting, handleSubmit }) => (
-        <Form>
-          <Field as="select" name={taskPriorityField}>
-            <option></option>
+        <Form className="task-form">
+          <Field
+            as="select"
+            name={taskPriorityField}
+            className="task-form__field task-form__select"
+          >
+            <option key="default" value="">
+              Select Priority
+            </option>
+            {options.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            ))}
           </Field>
-          <Field type="text" name={taskTitleField} placeholder="Task Title" />
+          <Field
+            type="text"
+            name={taskTitleField}
+            placeholder="Task Title"
+            className="task-form__field"
+          />
           <Field
             type="text"
             name={taskDescField}
             placeholder="Task Description"
+            className="task-form__field"
           />
           <button
             type="button"

@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 export enum TaskPriority {
   Low = "Low",
   Medium = "Medium",
-  High = "Heigh",
+  High = "High",
 }
 
 export interface Task {

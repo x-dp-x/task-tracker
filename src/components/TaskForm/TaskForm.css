@@ -1,0 +1,10 @@
+.task-form {
+  display: flex;
+  flex-flow: column;
+}
+
+.task-form__field {
+  height: 30px;
+  width: 100%;
+  margin: 0 0 10px 0;
+}

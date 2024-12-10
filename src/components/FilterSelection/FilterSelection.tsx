@@ -1,4 +1,5 @@
 import React from "react";
+import "./FilterSelection.css";
 
 interface FilterSelectionProps {
   title: string;
@@ -7,9 +8,9 @@ interface FilterSelectionProps {
 
 export const FilterSelection = ({ title, options }: FilterSelectionProps) => (
   <div className="filter">
-    <select>
+    <select className="filter__select">
       <option key="default" value="">
-        {title}
+        Filter By
       </option>
       {options.map((opt) => (
         <option key={opt} value={opt}>

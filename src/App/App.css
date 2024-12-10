@@ -1,3 +1,33 @@
+.app {
+  display: flex;
+  flex-flow: row;
+  align-items: stretch;
+  width: 100%;
+  max-width: 960px;
+  padding: 40px;
+  margin: 0 auto;
+}
+
+.body {
+  display: flex;
+  flex-flow: column;
+  flex-grow: 1;
+  padding: 0 40px;
+}
+
+.tasklist__empty-state {
+  padding: 40px 0;
+  width: 100%;
+}
+
+/***** *******/
+/***** *******/
+/***** *******/
+/* CSS RESET */
+/***** *******/
+/***** *******/
+/***** *******/
+
 /* 1. Use a more-intuitive box-sizing model */
 *,
 *::before,
@@ -31,7 +61,7 @@ svg {
 input,
 button,
 textarea,
-select {
+s elect {
   font: inherit;
 }
 
