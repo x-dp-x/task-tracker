@@ -19,30 +19,36 @@ export type Tasks = Task[] | [];
 export interface TaskContextProps {
   tasks: Tasks;
   setTasks(value: Tasks): void;
+  loaded: Boolean;
 }
 
 export const TaskContext = React.createContext<TaskContextProps>({
   tasks: [],
   setTasks: () => [],
+  loaded: false,
 });
 
 interface TaskProviderProps {
   children: ReactNode;
 }
 
-export const taskLocalStorageKey = uuidv4();
+export const taskLocalStorageKey = "_task_context_app_";
 
 export const TasksProvider = ({ children }: TaskProviderProps) => {
+  const [hasReadStore, setHasReadStore] = useState(false);
   const [tasks, setTasks] = useState<Tasks>([]);
 
   useEffect(() => {
     const tasksFromStore = localStorage.getItem(taskLocalStorageKey);
     const tasks = Boolean(tasksFromStore) && JSON.parse(tasksFromStore || "");
     tasks && setTasks(tasks);
+    setHasReadStore(true);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(taskLocalStorageKey, JSON.stringify(tasks));
+    if (hasReadStore) {
+      localStorage.setItem(taskLocalStorageKey, JSON.stringify(tasks));
+    }
   }, [tasks]);
 
   return (
@@ -50,6 +56,7 @@ export const TasksProvider = ({ children }: TaskProviderProps) => {
       value={{
         tasks,
         setTasks,
+        loaded: hasReadStore,
       }}
     >
       {children}

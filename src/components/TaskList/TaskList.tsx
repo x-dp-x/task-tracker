@@ -5,18 +5,23 @@ import "./TaskList.css";
 
 interface TaskListProps {
   tasks: Tasks;
+  loaded: Boolean;
 }
 
-export const TaskList = ({ tasks }: TaskListProps) => {
-  return tasks.length > 0 ? (
+export const TaskList = ({ tasks, loaded }: TaskListProps) => {
+  if (loaded && tasks.length <= 0) {
+    return (
+      <p className="tasklist__empty-state">
+        No tasks yet! Please use the form to start adding tasks
+      </p>
+    );
+  }
+
+  return (
     <section className="tasklist">
       {tasks.map((task) => (
         <Task key={task.id} {...task} />
       ))}
     </section>
-  ) : (
-    <p className="tasklist__empty-state">
-      No tasks yet! Please use the form to start adding tasks
-    </p>
   );
 };

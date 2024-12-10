@@ -11,7 +11,7 @@ interface EditTask {
   task: Task;
 }
 
-interface DeleteTask {
+export interface DeleteTask {
   taskId: string;
 }
 
@@ -20,7 +20,7 @@ interface SetTasks {
 }
 
 export const useTasks = () => {
-  const { tasks, setTasks: setTasksState } = useContext(TaskContext);
+  const { tasks, setTasks: setTasksState, loaded } = useContext(TaskContext);
 
   const addTask = ({ task }: AddTask) => {
     const newTasks = [...tasks, { ...task }];
@@ -59,5 +59,6 @@ export const useTasks = () => {
     addTask,
     editTask,
     deleteTask,
+    loaded,
   };
 };

@@ -8,13 +8,13 @@ import { TaskForm } from "../../components/TaskForm/TaskForm.tsx";
 const filterOpts = [TaskPriority.High, TaskPriority.Medium, TaskPriority.Low];
 
 export const LandingPage = () => {
-  const { tasks, addTask } = useTasks();
+  const { tasks, addTask, loaded } = useTasks();
 
   return (
     <>
       <div className="body">
         <FilterSelection title="Filter By" options={filterOpts} />
-        <TaskList tasks={tasks} />
+        <TaskList tasks={tasks} loaded={loaded} />
       </div>
 
       <aside className="aside">
