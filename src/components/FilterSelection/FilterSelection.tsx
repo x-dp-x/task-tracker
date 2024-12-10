@@ -16,6 +16,7 @@ export const FilterSelection = ({
 }: FilterSelectionProps) => (
   <div className="filter">
     <select
+      data-testid="filter-select"
       className="filter__select"
       onChange={(e) =>
         handleFilter({ filterBy: e.target.value as TaskPriority })

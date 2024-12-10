@@ -52,6 +52,7 @@ export const TaskForm = ({
             as="select"
             name={taskPriorityField}
             className="task-form__field task-form__select"
+            data-testid="task-form-select"
           >
             <option key="default" value="">
               Select Priority

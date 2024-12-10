@@ -28,8 +28,6 @@ export const FilterProvider = ({ children }: FilterProviderProps) => {
     filterBy: null,
   });
 
-  console.log(filterOpts);
-
   return (
     <FilterContext.Provider
       value={{
